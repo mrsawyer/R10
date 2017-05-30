@@ -7,24 +7,36 @@
 import React, { Component } from 'react';
 import {
   Text,
-  View
+  View,
+  StatusBar
 } from 'react-native';
+import {
+  NavigationContext,
+  NavigationProvider,
+  StackNavigation,
+} from '@expo/ex-navigation';
+
+import { Provider } from 'react-redux';
+
+import Router from './navigation/router';
+import Store from './redux/store';
+
+const navigationContext = new NavigationContext({
+  router: Router,
+  store: Store,
+})
 
 export default class R10 extends Component {
   render() {
     return (
-      <View>
-        <Text>
-          Welcome to React Native!
-        </Text>
-        <Text>
-          To get started, edit index.ios.js
-        </Text>
-        <Text>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Provider store={Store}>
+        <NavigationProvider context={navigationContext}>
+          <StatusBar barStyle="light-content" />
+          <StackNavigation
+          initialRoute={Router.getRoute('layout')}
+          />
+        </NavigationProvider>
+      </Provider>
     );
   }
 }
