@@ -7,6 +7,8 @@ import {
 } from '@expo/ex-navigation';
 import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { StyleSheet } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import Router from './router';
 
@@ -17,9 +19,22 @@ const defaultRouteConfig = {
       fontFamily: typography.fontMain,
       color: colors.white
     },
-    backgroundColor: colors.pink
+    renderBackground: () => <LinearGradient
+                            start={{x: 0.25, y: 1.0}}
+                            end={{x: 1.0, y: 0.25}}
+                            colors={[colors.red, colors.purple]}
+                            style={styles.linearGradient}
+                            />
   }
 }
+
+const styles = StyleSheet.create({
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15
+  }
+});
 
 class NavigationLayout extends Component {
   static route = {
@@ -58,6 +73,7 @@ class NavigationLayout extends Component {
           <StackNavigation
             defaultRouteConfig={defaultRouteConfig}
             id="schedule"
+            navigatorUID="schedule"
             initialRoute={Router.getRoute('schedule')}
           />
         </TabItem>

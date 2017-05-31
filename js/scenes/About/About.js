@@ -1,10 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
-  View,
   Text,
   Image,
-  ActivityIndicator,
   ScrollView
 } from 'react-native';
 
@@ -12,7 +9,7 @@ import CodeConduct from '../../components/CodeConduct';
 
 import { styles } from './styles';
 
-const About = ({data}) => {
+const About = ({ conductData }) => {
   return (
     <ScrollView style={styles.container}>
       <Image
@@ -23,7 +20,7 @@ const About = ({data}) => {
       <Text style={styles.title}> Date & Venue</Text>
       <Text style={styles.paragraph}> The R10 conference will take place on Tuesday, June 27, 2017 in Vancouver, BC.</Text>
       <Text style={styles.title}> Code of Conduct</Text>
-      {data.map((item, i) => (
+      {conductData.map((item, i) => (
         <CodeConduct item={item} key={i} />
       ))}
     </ScrollView>

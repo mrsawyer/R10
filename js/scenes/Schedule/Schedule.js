@@ -5,18 +5,25 @@ import {
   Text,
   Image,
   ActivityIndicator,
-  ScrollView
+  ScrollView,
+  ListView
 } from 'react-native';
 
-import CodeConduct from '../../components/CodeConduct';
+import SessionItem from '../../components/SessionItem';
+import SessionHeader from '../../components/SessionHeader';
 
 import { styles } from './styles';
 
-const Schedule = () => {
+const Schedule = ( {sessions} ) => {
   return (
-    <ScrollView>
-      <Text> Code of Conduct</Text>
-    </ScrollView>
+      <ListView
+        dataSource={sessions}
+        renderRow={rowData => <SessionItem
+                    currentNavigatorUID = "schedule"
+                    rowData = {rowData} />
+                  }
+        renderSectionHeader={(sectionData, time) => <SessionHeader time={time} />}
+      />
   );
 }
 
