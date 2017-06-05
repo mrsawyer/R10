@@ -14,6 +14,7 @@ import {
   NavigationContext,
   NavigationProvider,
   StackNavigation,
+  NavigationStyles
 } from '@expo/ex-navigation';
 
 import { Provider } from 'react-redux';
@@ -33,7 +34,9 @@ export default class R10 extends Component {
         <NavigationProvider context={navigationContext}>
           <StatusBar barStyle="light-content" />
           <StackNavigation
+          navigatorUID="root"
           initialRoute={Router.getRoute('layout')}
+          defaultRouteConfig={{styles: {...NavigationStyles.SlideVertical}}}
           />
         </NavigationProvider>
       </Provider>

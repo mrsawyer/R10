@@ -9,23 +9,24 @@ import {
   ListView
 } from 'react-native';
 import { connect } from 'react-redux';
-import { _fetchSessions } from '../../redux/modules/sessions';
+import { _fetchFaves } from '../../redux/modules/faves';
+import realm from '../../config/models';
 
-import Schedule from './Schedule';
+import Faves from './Faves';
 
-class ScheduleContainer extends Component {
+class FavesContainer extends Component {
   static propTypes = {
 
   }
 
   static route = {
     navigationBar: {
-      title: 'Schedule',
+      title: 'Faves',
     }
   }
 
   componentDidMount() {
-    this.props.fetchSessions();
+    this.props.fetchFaves();
   }
 
   render() {
@@ -35,7 +36,7 @@ class ScheduleContainer extends Component {
       );
     } else {
       return(
-        <Schedule isLoading={this.props.isLoading} sessions={this.props.dataSource}/>
+        <Faves isLoading={this.props.isLoading} faves={this.props.dataSource}/>
       );
     }
   }
@@ -49,21 +50,21 @@ const ds = new ListView.DataSource({
 function mapStateToProps(state) {
   return {
     dataSource: ds.cloneWithRowsAndSections(
-      state.sessions.sessionsData.dataBlob,
-      state.sessions.sessionsData.sectionIds,
-      state.sessions.sessionsData.rowIds,
+      state.faves.favesData.dataBlob,
+      state.faves.favesData.sectionIds,
+      state.faves.favesData.rowIds,
     ),
-    isLoading: state.sessions.isLoading
+    isLoading: state.faves.isLoading
   };
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    fetchSessions() {
-      dispatch(_fetchSessions())
+    fetchFaves() {
+      dispatch(_fetchFaves())
     }
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScheduleContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FavesContainer);

@@ -45,7 +45,7 @@ export default function reducer(state = {
       })
     }
     case GET_SESSIONS_ERROR: {
-      return object.assign({}, state, {
+      return Object.assign({}, state, {
         isLoading: false,
         error: action.payload
       })
@@ -62,4 +62,5 @@ export default function reducer(state = {
       return state;
     }
   }
-};
+}
+

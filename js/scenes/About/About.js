@@ -23,6 +23,7 @@ const About = ({ conductData }) => {
       {conductData.map((item, i) => (
         <CodeConduct item={item} key={i} />
       ))}
+      <Text style={styles.copy}> RED Academy 2017</Text>
     </ScrollView>
   );
 }

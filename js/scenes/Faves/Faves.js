@@ -14,18 +14,22 @@ import SessionHeader from '../../components/SessionHeader';
 
 import { styles } from './styles';
 
-const Schedule = ( {sessions} ) => {
+import { queryFaves } from '../../config/models';
+
+const favesArray = queryFaves();
+
+const Faves = ( {faves} ) => {
+  console.log(faves)
   return (
       <ListView
-        dataSource={sessions}
+        dataSource={faves}
         renderRow={rowData => <SessionItem
-                    currentNavigatorUID = "schedule"
+                    currentNavigatorUID = "faves"
                     rowData = {rowData} />
                   }
-        renderSectionHeader={(sectionData, time) => <SessionHeader time={time}
-        style={styles.container} />}
+        renderSectionHeader={(sectionData, time) => <SessionHeader time={time} />}
       />
   );
 }
 
-export default Schedule;
+export default Faves;

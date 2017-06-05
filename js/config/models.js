@@ -1,17 +1,15 @@
 import Realm from 'realm';
+
 const Fave = {
   name: 'Fave',
   primaryKey: 'id',
   properties: {
-    id: 'int',
+    id: 'string',
     faved_on: {type: 'date', optional: true} ,
   }
 };
 
 const realm  = new Realm({schema: [Fave]});
-
-realm = new Realm({schema: [Dog]});
-console.log('the path is: ', realm.path);
 
 export const queryFaves = () => {
   let faves = realm.objects('Fave').map(fave => fave.id);
@@ -31,4 +29,5 @@ export const deleteFave = (faveId) => {
     realm.delete(fave);
   });
 }
+
 export default realm;

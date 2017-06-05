@@ -49,21 +49,7 @@ class NavigationLayout extends Component {
         tabBarColor={colors.black}
         id="main"
         navigatorUID="main"
-        initialTab="about">
-        <TabItem
-          id="about"
-          title="About"
-          renderTitle={ this.renderTitle }
-          renderIcon={ (isSelected) => this.renderIcon('ios-information-circle', isSelected) }
-        >
-          <StackNavigation
-            defaultRouteConfig={defaultRouteConfig}
-            id="about"
-            navigatorUID="about"
-            initialRoute={Router.getRoute('about')}
-          />
-        </TabItem>
-
+        initialTab="schedule">
         <TabItem
           id="schedule"
           title="Schedule"
@@ -75,6 +61,48 @@ class NavigationLayout extends Component {
             id="schedule"
             navigatorUID="schedule"
             initialRoute={Router.getRoute('schedule')}
+          />
+        </TabItem>
+
+        <TabItem
+          id="map"
+          title="map"
+          renderTitle={ this.renderTitle }
+          renderIcon={ (isSelected) => this.renderIcon('ios-map', isSelected) }
+        >
+          <StackNavigation
+            defaultRouteConfig={defaultRouteConfig}
+            id="map"
+            navigatorUID="map"
+            //initialRoute={Router.getRoute('map')}
+          />
+        </TabItem>
+
+        <TabItem
+          id="faves"
+          title="Faves"
+          renderTitle={ this.renderTitle }
+          renderIcon={ (isSelected) => this.renderIcon('ios-heart', isSelected) }
+        >
+          <StackNavigation
+            defaultRouteConfig={defaultRouteConfig}
+            id="faves"
+            navigatorUID="faves"
+            initialRoute={Router.getRoute('faves')}
+          />
+        </TabItem>
+
+        <TabItem
+          id="about"
+          title="About"
+          renderTitle={ this.renderTitle }
+          renderIcon={ (isSelected) => this.renderIcon('ios-information-circle', isSelected) }
+        >
+          <StackNavigation
+            defaultRouteConfig={defaultRouteConfig}
+            id="about"
+            navigatorUID="about"
+            initialRoute={Router.getRoute('about')}
           />
         </TabItem>
       </TabNavigation>
