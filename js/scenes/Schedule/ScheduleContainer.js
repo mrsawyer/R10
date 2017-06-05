@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View,
-  Text,
-  Image,
   ActivityIndicator,
-  ScrollView,
   ListView
 } from 'react-native';
 import { connect } from 'react-redux';
+import realm from '../../config/models';
 import { _fetchSessions } from '../../redux/modules/sessions';
+import { _fetchFaves } from '../../redux/modules/faves';
 
 import Schedule from './Schedule';
 
 class ScheduleContainer extends Component {
+  constructor() {
+  super();
+  realm.addListener('change', () => {
+    this.props.fetchSessions();
+    this.props.fetchFaves();
+  });
+}
   static propTypes = {
 
   }
@@ -26,16 +31,17 @@ class ScheduleContainer extends Component {
 
   componentDidMount() {
     this.props.fetchSessions();
+    this.props.fetchFaves();
   }
 
   render() {
-    if (this.props.isLoading) {
+    if (this.props.isSessionsLoading || this.props.isFavesLoading) {
       return (
         <ActivityIndicator animating={true} size="small" color="black" />
       );
     } else {
       return(
-        <Schedule isLoading={this.props.isLoading} sessions={this.props.dataSource}/>
+        <Schedule sessions={this.props.dataSource} faves={this.props.favesIds}/>
       );
     }
   }
@@ -53,7 +59,9 @@ function mapStateToProps(state) {
       state.sessions.sessionsData.sectionIds,
       state.sessions.sessionsData.rowIds,
     ),
-    isLoading: state.sessions.isLoading
+    isSessionsLoading: state.sessions.isLoading,
+    isFavesLoading: state.faves.isLoading,
+    favesIds: state.faves.favesIds
   };
 }
 
@@ -61,6 +69,9 @@ function mapDispatchToProps(dispatch){
   return {
     fetchSessions() {
       dispatch(_fetchSessions())
+    },
+    fetchFaves() {
+      dispatch(_fetchFaves())
     }
   }
 }

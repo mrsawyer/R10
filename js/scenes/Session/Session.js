@@ -22,11 +22,11 @@ import { queryFaves } from '../../config/models';
 
 const favesArray = queryFaves();
 
-const Session = ({session, speaker}) => {
+const Session = ({session, speaker, faves}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.location}> {session.location}
-        {favesArray.includes(session.session_id) &&
+        {faves.includes(session.session_id) &&
           <Icon
             name={
               Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'
@@ -55,7 +55,7 @@ const Session = ({session, speaker}) => {
             </TouchableHighlight>
         </View>
       }
-      {favesArray.includes(session.session_id) ? (
+      {faves.includes(session.session_id) ? (
       <TouchableOpacity
         onPress={() => deleteFave(session.session_id)}
         style={styles.button}

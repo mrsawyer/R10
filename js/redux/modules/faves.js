@@ -10,16 +10,16 @@ const GET_FAVES = 'GET_FAVES';
 
 const getFavesLoading = () => ({ type: GET_FAVES_LOADING });
 const getFavesError = (error) => ({ type: GET_FAVES_ERROR, payload: error});
-const getFaves = (faves) => ({ type: GET_FAVES, payload: faves });
-
-const favesArray = queryFaves();
+const getFaves = (faves, favesIds) => ({ type: GET_FAVES, faves, favesIds });
 
 export const _fetchFaves = () => (dispatch) => {
   dispatch(getFavesLoading());
 
+  const favesArray = queryFaves();
+
   return fetch(`${firebaseUrl}/sessions.json`)
           .then(response => response.json())
-          .then(sessions => dispatch(getFaves(sessions.filter(session => favesArray.includes(session.session_id)))))
+          .then(sessions => dispatch(getFaves(sessions.filter(session => favesArray.includes(session.session_id)), favesArray)))
           .catch(error => dispatch(getFavesError(error)))
 }
 
@@ -46,11 +46,12 @@ export default function reducer(state = {
       })
     }
     case GET_FAVES: {
-      let faves = formatSessionData(action.payload);
+      let faves = formatSessionData(action.faves);
       return Object.assign({}, state, {
         isLoading: false,
         error: '',
-        favesData: faves
+        favesData: faves,
+        favesIds: action.favesIds
       })
     }
     default: {

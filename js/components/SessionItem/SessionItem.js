@@ -19,7 +19,7 @@ import { styles } from './styles';
 
 const favesArray = queryFaves();
 
-const SessionItem = ({currentNavigatorUID, rowData}) => {
+const SessionItem = ({currentNavigatorUID, rowData, faves}) => {
   return (
     <TouchableHighlight
     onPress={() => goToSession(currentNavigatorUID, rowData)}
@@ -30,7 +30,7 @@ const SessionItem = ({currentNavigatorUID, rowData}) => {
         <Text style={styles.title}>{rowData.title}</Text>
         <View style={styles.heart}>
           <Text style={styles.location}> {rowData.location}
-        {favesArray.includes(rowData.session_id) &&
+        {faves.includes(rowData.session_id) &&
           <Icon
             name={
               Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'

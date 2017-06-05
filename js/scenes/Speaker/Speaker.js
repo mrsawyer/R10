@@ -32,7 +32,7 @@ class Speaker extends Component {
           <Text style={styles.name}> {this.props.speaker.name}</Text>
           <Text style={styles.bio}> {this.props.speaker.bio} </Text>
           <TouchableOpacity
-            onPress={this.handleClick(this.props.speaker.url)}
+            onPress={() => this.handleClick(this.props.speaker.url)}
             style={styles.button}
           >
             <LinearGradient

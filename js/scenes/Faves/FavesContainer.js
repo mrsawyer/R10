@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View,
-  Text,
-  Image,
   ActivityIndicator,
-  ScrollView,
   ListView
 } from 'react-native';
 import { connect } from 'react-redux';
-import { _fetchFaves } from '../../redux/modules/faves';
-import realm from '../../config/models';
 
 import Faves from './Faves';
 
@@ -25,18 +19,15 @@ class FavesContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.fetchFaves();
-  }
-
   render() {
-    if (this.props.isLoading) {
+    if (this.props.isFavesLoading) {
       return (
         <ActivityIndicator animating={true} size="small" color="black" />
       );
     } else {
+      console.log(this.props.dataSource)
       return(
-        <Faves isLoading={this.props.isLoading} faves={this.props.dataSource}/>
+        <Faves sessions={this.props.dataSource} faves={this.props.favesIds}/>
       );
     }
   }
@@ -54,17 +45,9 @@ function mapStateToProps(state) {
       state.faves.favesData.sectionIds,
       state.faves.favesData.rowIds,
     ),
-    isLoading: state.faves.isLoading
+    isFavesLoading: state.faves.isLoading,
+    favesIds: state.faves.favesIds
   };
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-    fetchFaves() {
-      dispatch(_fetchFaves())
-    }
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(FavesContainer);
+export default connect(mapStateToProps)(FavesContainer);

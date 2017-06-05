@@ -14,13 +14,16 @@ import SessionHeader from '../../components/SessionHeader';
 
 import { styles } from './styles';
 
-const Schedule = ( {sessions} ) => {
+const Schedule = ( {sessions, faves} ) => {
+  console.log(faves)
   return (
       <ListView
         dataSource={sessions}
         renderRow={rowData => <SessionItem
                     currentNavigatorUID = "schedule"
-                    rowData = {rowData} />
+                    rowData = {rowData}
+                    faves={faves}
+                    />
                   }
         renderSectionHeader={(sectionData, time) => <SessionHeader time={time}
         style={styles.container} />}

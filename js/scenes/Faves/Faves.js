@@ -1,31 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View,
-  Text,
-  Image,
-  ActivityIndicator,
-  ScrollView,
-  ListView
-} from 'react-native';
+import { ListView } from 'react-native';
 
 import SessionItem from '../../components/SessionItem';
 import SessionHeader from '../../components/SessionHeader';
 
-import { styles } from './styles';
-
-import { queryFaves } from '../../config/models';
-
-const favesArray = queryFaves();
-
-const Faves = ( {faves} ) => {
-  console.log(faves)
+const Faves = ( {sessions, faves} ) => {
+  console.log(sessions, faves)
   return (
       <ListView
-        dataSource={faves}
+        dataSource={sessions}
         renderRow={rowData => <SessionItem
                     currentNavigatorUID = "faves"
-                    rowData = {rowData} />
+                    rowData = {rowData}
+                    faves={ faves } />
                   }
         renderSectionHeader={(sectionData, time) => <SessionHeader time={time} />}
       />
