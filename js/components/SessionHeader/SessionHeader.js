@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import {
   View,
-  Text,
-  Image,
-  ActivityIndicator,
-  TouchableHighlight
+  Text
 } from 'react-native';
 
 import { styles } from './styles';

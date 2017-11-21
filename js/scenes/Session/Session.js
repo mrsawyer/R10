@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -17,10 +18,6 @@ import { colors } from '../../config/styles';
 import { createFave } from '../../config/models';
 import { deleteFave } from '../../config/models';
 import { goToSpeaker } from '../../lib/navigationHelpers';
-
-import { queryFaves } from '../../config/models';
-
-const favesArray = queryFaves();
 
 const Session = ({session, speaker, faves}) => {
   return (
@@ -87,5 +84,11 @@ const Session = ({session, speaker, faves}) => {
     </View>
   );
 }
+
+Session.propTypes = {
+  session: PropTypes.arr,
+  speaker: PropTypes.arr,
+  faves: PropTypes.faves,
+};
 
 export default Session;
